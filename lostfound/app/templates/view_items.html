@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>All Reported Items</h2>
+
+    <h4 class="mt-4">Lost Items</h4>
+    <div class="row">
+        {% for item in lost_items %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='uploads/' ~ item.image_filename) }}" class="card-img-top" alt="{{ item.item_name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.item_name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="text-muted">Lost at {{ item.location }} on {{ item.date_lost.strftime('%Y-%m-%d') }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h4 class="mt-5">Found Items</h4>
+    <div class="row">
+        {% for item in found_items %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename='uploads/' ~ item.image_filename) }}" class="card-img-top" alt="{{ item.item_name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.item_name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="text-muted">Found at {{ item.location }} on {{ item.date_found.strftime('%Y-%m-%d') }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
